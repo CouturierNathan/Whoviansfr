@@ -25,6 +25,7 @@ Follow these steps to set up the project:
 
     ```sh
     chmod +x setup
+    chmod +x run
     ```
 
 3. **Run the Setup Script**
