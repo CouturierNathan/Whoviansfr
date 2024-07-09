@@ -53,13 +53,13 @@ Follow these steps to set up the project:
     ./run
     ```
 
-4.bis **Setup and Run the Services**
+4. bis **Setup and Run the Services**
     
     Executes the setup script with flag r to configure and launch services details below.
 
     ```sh
     ./setup -r
-    ``` 
+    ```
 
 5. **Access the Services**
 
@@ -70,6 +70,7 @@ Follow these steps to set up the project:
 
 The project is organized as follows:
 
+```sh
 whovians.fr/
 │
 ├── api/
@@ -92,7 +93,7 @@ whovians.fr/
 ├── setup
 ├── run
 └── README.md
-
+```
 ## Docker Configuration
 
 The `docker-compose.yml` file defines the services for the project:
