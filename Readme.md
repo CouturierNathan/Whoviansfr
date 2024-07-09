@@ -53,7 +53,7 @@ Follow these steps to set up the project:
     ./run
     ```
 
-4. bis **Setup and Run the Services**
+5. **Setup and Run the Services**
     
     Executes the setup script with flag r to configure and launch services details below.
 
@@ -61,7 +61,7 @@ Follow these steps to set up the project:
     ./setup -r
     ```
 
-5. **Access the Services**
+6. **Access the Services**
 
     - **Frontend**: Open your browser and navigate to `http://localhost`
     - **API**: The API will be accessible at `http://localhost:5000`
