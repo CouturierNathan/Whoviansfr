@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Créer un réseau Docker personnalisé
+docker network create my_app_network
+
+# Lancer les conteneurs avec Docker Compose
+docker-compose up -d

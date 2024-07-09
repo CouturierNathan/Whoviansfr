@@ -1,0 +1,54 @@
+@font-face {
+    font-family: 'Doctor-Who';
+    src: url('fonts/Doctor-Who.ttf') format('truetype');
+    font-weight: 200;
+    font-style: normal;
+}
+
+.banner {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+}
+
+.presentation {
+    position: relative;
+    width: calc(100% / 2);
+    text-align: center;
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.title {
+    font-family:sans-serif;
+    font-weight: 500;
+    font-size: 3em;
+    color: #00203c;
+    margin-top: 15px;
+}
+
+.quote {
+    text-align: center;
+    font-size: 1.5em;
+    color: #00203c;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+    .quote {
+        flex-direction: column;
+    }
+  }

@@ -1,0 +1,29 @@
+.NotFound {
+    margin-top: 4%;
+    text-align: center;
+}
+
+.NotFound img {
+    width: 25%;
+    height: auto;
+}
+
+@media screen and (max-width: 768px){
+    .NotFound img {
+        width: 50%;
+    }
+
+    .WorkingOnIt img {
+        width: 50%;
+    }
+}
+
+.WorkingOnIt {
+    margin-top: 4%;
+    text-align: center;
+}
+
+.WorkingOnIt img {
+    width: 25%;
+    height: auto;
+}

@@ -1,0 +1,123 @@
+@font-face {
+  font-family: 'Doctor-Who';
+  src: url('fonts/Doctor-Who.ttf') format('truetype');
+  font-weight: 200;
+  font-style: normal;
+}
+
+.Event {
+    background-color: #00203c;
+    color: white;
+    height: auto;
+    margin: 1em;
+    padding: 1em;
+    border-radius: 30px;
+}
+
+.Event h2 {
+    font-size: 2em;
+    text-align: center;
+}
+
+.Event .container {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top : 50px;
+}
+
+.Event .container .images {
+    width: 50%;
+    height: auto;
+    overflow: hidden;
+}
+
+.carousel-inner img {
+    width: 100%;
+    height: auto;
+  }
+  
+.carousel {
+  width: 100%;
+  max-width: 800px; /* Définissez la largeur maximale selon vos besoins */
+  margin: auto; /* Centrez le carousel horizontalement */
+}
+
+.Event .description {
+    margin-left: 5%;
+    width: 50%;
+    text-align: center;
+}
+
+.Event .description h1{
+    font-size: 5em;
+    text-align: center;
+    color: yellow;
+    font-family: 'Doctor-Who', sans-serif;
+}
+
+.Event .description h2 {
+    font-size: 3em;
+    text-align: center;
+    color: yellow;
+    font-family: 'Doctor-Who', sans-serif;
+}
+
+.details {
+    color: white;
+    width: 100%;
+    height: auto;
+    margin-top: 1em;
+    padding: 1em;
+    text-align: center;
+}
+
+.details h2{
+    font-size: 2em;
+    text-align: center;
+    color: yellow;
+}
+
+
+.details a {
+    color: white;
+    text-decoration: none;
+}
+
+.details a:hover {
+    color: yellow;
+}
+
+.details iframe {
+    width : 100%;
+    height : 450px;
+}
+
+.description .button {
+  margin-top: 100px;
+}
+
+@media screen and (max-width: 768px) {
+  .Event .container {
+      display: flex;
+      flex-direction: column;
+      align-content: center;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 25px;
+  }
+  .Event .description {
+      text-align: center;
+      width : 100%;
+      margin-left: auto;
+  }
+  .Event iframe {
+      width : 100%;
+  }
+  .Event .description .button {
+    margin-top: 20px;
+  }
+}

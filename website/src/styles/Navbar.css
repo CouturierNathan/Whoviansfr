@@ -1,0 +1,74 @@
+@font-face {
+    font-family: 'Doctor-Who';
+    src: url('fonts/Doctor-Who.ttf') format('truetype');
+    font-weight: 200;
+    font-style: normal;
+}
+
+.navbar {
+    background-color: white;
+    overflow: hidden;
+    border-bottom: 5px solid #c7c5c5;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.navbar h1 {
+    font-family: 'Doctor-Who', sans-serif;
+    font-size: 5em;
+    color: #00203c;
+    text-align: center;
+}
+
+.navbar .links {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+}
+
+.navbar .links li {
+    list-style-type: none;
+    margin-right: 10px;
+}
+
+.navbar img {
+    width: 100px;
+    height: 100px;
+}
+
+.navbar .links li a  {
+    color: #000;
+    text-decoration: none;
+}
+
+.navbar .links .menu__link {
+    color: #000;
+    line-height: 2;
+    position: relative;
+  }
+  
+.navbar .links .menu__link::before {
+    content: '';
+    width: 0;
+    height: 2px;
+    border-radius: 2px;
+    background-color: #000;
+    position: absolute;
+    bottom: -.25rem;
+    right: 0;
+    transition: right .4s, width .4s, left .4s;
+  }
+  
+.navbar .links .menu__link:hover::before {
+    width: 100%;
+    left: 0;
+  }
