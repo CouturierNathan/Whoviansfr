@@ -1,0 +1,49 @@
+#!/bin/bash
+
+# Function to stop a container if it exists
+stop_container() {
+    if docker ps -a --format '{{.Names}}' | grep -Eq "^$1$"; then
+        echo "Stopping container: $1"
+        docker stop $1
+    else
+        echo "Container $1 does not exist."
+    fi
+}
+
+# Function to check if a port is in use
+port_in_use() {
+    local port=$1
+    if sudo netstat -tuln | grep -qE ":${port}\s"; then
+        echo "Port $port is already in use."
+        return 0
+    else
+        echo "Port $port is free."
+        return 1
+    fi
+}
+
+# Check if network exists and remove it if it does
+if docker network ls --format '{{.Name}}' | grep -q "^my_app_network$"; then
+    echo "Removing network: my_app_network"
+    docker network rm my_app_network
+else
+    echo "Network my_app_network does not exist."
+fi
+
+# Stop all running Docker containers
+stop_container api_c
+stop_container db_c
+stop_container website_c
+
+# Check if port 5000 is in use
+if port_in_use ${API_PORT}; then
+    echo "Attempting to free api port..."
+    # You can add additional commands here to free the port if needed
+    # For example: sudo service <service_name> stop
+fi
+
+if port_in_use ${FRONTEND_PORT}; then
+    echo "Attempting to free front end port..."
+    # You can add additional commands here to free the port if needed
+    # For example: sudo service <service_name> stop
+fi

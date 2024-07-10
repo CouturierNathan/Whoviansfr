@@ -4,4 +4,4 @@
 docker network create my_app_network
 
 # Lancer les conteneurs avec Docker Compose
-docker-compose up -d
+docker-compose up
