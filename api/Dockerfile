@@ -1,4 +1,4 @@
-FROM node:20.15.1
+FROM node:latest
 
 WORKDIR /app
 
@@ -8,7 +8,7 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 5000
+EXPOSE 4242
 
 # Démarrer l'application
 CMD ["node", "server.js"]

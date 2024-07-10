@@ -64,7 +64,7 @@ Follow these steps to set up the project:
 6. **Access the Services**
 
     - **Frontend**: Open your browser and navigate to `http://localhost`
-    - **API**: The API will be accessible at `http://localhost:5000`
+    - **API**: The API will be accessible at `http://localhost:4242`
 
 ## Project Structure
 
