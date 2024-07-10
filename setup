@@ -2,6 +2,9 @@
 
 ./stop
 
+cd website && npm install && cd ..
+cd api && npm install && cd ..
+
 # Fonction pour afficher l'usage
 usage() {
   echo "Usage: $0 [-r]"

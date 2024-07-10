@@ -1,6 +1,6 @@
 const Exhib = require('../models/exhibModel');
 
-exports.getAllExhibs = (req, res) => {
+exports.getAllExhib = (req, res) => {
     Exhib.getAll((err, exhibs) => {
     if (err) {
       res.status(500).send(err);
