@@ -10,18 +10,6 @@ stop_container() {
     fi
 }
 
-# Function to check if a port is in use
-port_in_use() {
-    local port=$1
-    if sudo netstat -tuln | grep -qE ":${port}\s"; then
-        echo "Port $port is already in use."
-        return 0
-    else
-        echo "Port $port is free."
-        return 1
-    fi
-}
-
 # Check if network exists and remove it if it does
 if docker network ls --format '{{.Name}}' | grep -q "^my_app_network$"; then
     echo "Removing network: my_app_network"
@@ -35,15 +23,26 @@ stop_container api_c
 stop_container db_c
 stop_container website_c
 
-# Check if port 5000 is in use
-if port_in_use ${API_PORT}; then
-    echo "Attempting to free api port..."
-    # You can add additional commands here to free the port if needed
-    # For example: sudo service <service_name> stop
-fi
+# Execute `ps aux` command and search for MySQL processes
+mysql_processes=$(ps aux | grep '[m]ysqld' | awk '{print $2}')
 
-if port_in_use ${FRONTEND_PORT}; then
-    echo "Attempting to free front end port..."
-    # You can add additional commands here to free the port if needed
-    # For example: sudo service <service_name> stop
+if [ -z "$mysql_processes" ]; then
+  echo "No MySQL processes running."
+else
+  echo "MySQL processes found:"
+  echo "$mysql_processes"
+  
+  for pid in $mysql_processes; 
+  do
+    echo "Attempting to stop MySQL process with PID: $pid..."
+    
+    # Kill MySQL process using PID
+    kill -9 $pid
+    
+    if [ $? -eq 0 ]; then
+      echo "MySQL process with PID $pid stopped successfully."
+    else
+      echo "Failed to stop MySQL process with PID $pid."
+    fi
+  done
 fi

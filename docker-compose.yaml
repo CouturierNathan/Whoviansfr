@@ -5,46 +5,49 @@ services:
     image: mysql:latest
     container_name: db_c
     env_file:
-      - .env
+      - ./.env
     restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-    
     ports:
       - "3306:3306"
 
   api:
     build: ./api
-
     depends_on:
       - db
-
     restart: unless-stopped
     container_name: api_c
     env_file:
-      - .env
+      - ./.env
     environment:
       DB_HOST: db_c
       DB_USER: ${MYSQL_USER}
       DB_PASSWORD: ${MYSQL_PASSWORD}
       DB_NAME: ${MYSQL_DATABASE}
       PORT: ${API_PORT}
-
     ports:
       - "${API_PORT}:${API_PORT}"
-
     volumes:
       - ./api:/app
 
   website:
     build: ./website
+    depends_on:
+      - api
+    restart: unless-stopped
     container_name: website_c
     volumes:
       - ./website:/app
     env_file:
-      - .env
+      - ./.env
+    environment:
+      REACT_APP_API_HOST: api_c
+      REACT_APP_PORT: ${FRONTEND_PORT}
+      REACT_APP_API_URL: localhost:${API_PORT}
+      REACT_APP_NODE_OPTIONS: --openssl-legacy-provider
     ports:
       - "${FRONTEND_PORT}:${FRONTEND_PORT}"
