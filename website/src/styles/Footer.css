@@ -38,7 +38,16 @@
     border-radius: 60px;
 }
 
-.Footer .container .contact .social a img {
+.socialmedia {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    align-content: center;
+    flex-wrap: nowrap;
+}
+
+.social a img {
     width: 30px;
     height: 30px;
     margin: 5px;

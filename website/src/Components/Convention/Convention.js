@@ -1,6 +1,5 @@
 import React from 'react';
 
-import Add from './Add';
 import Participants from './Participants';
 
 import "../../styles/Convention.css";
@@ -71,7 +70,6 @@ const Convention = () => {
                 <p>Ce projet porté par des étudiants fans de la série et leurs directeur pédagogique, tous sont fan de l'univers du Docteur et souhaitaient partager leur passions avec tout les whovians. Grâce à des partenairs, que nous remercions, cet évènement est possible et ils nous permettent de vous proposer la meilleure expérience possible.</p>
             </div>
             <Participants />
-            <Add />
         </div>
     );
 }

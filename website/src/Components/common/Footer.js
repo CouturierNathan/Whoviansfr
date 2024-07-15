@@ -1,6 +1,7 @@
 import React from 'react';
 
-import logo from "../../assets/instagram.svg"
+import logoInsta from "../../assets/instagram.svg"
+import logoFb from "../../assets/Facebook.svg"
 
 import '../../styles/Footer.css';
 
@@ -26,8 +27,13 @@ const Footer = () => {
                 <div className='separator' />
                 <div className='contact'>
                     <h5>Réseaux sociaux: </h5>
-                    <div className='social'>
-                        <a href='https://www.instagram.com/whovians.fr/' target='blank'> <img src={ logo } alt='instagram' /> </a>
+                    <div className='socialmedia'>
+                        <div className='social'>
+                            <a href='https://www.instagram.com/whovians.fr/' target='blank'> <img src={ logoInsta } alt='instagram' /> </a>
+                        </div>
+                        <div className='social'>
+                            <a href='https://www.facebook.com/profile.php?id=61561717794230' target='blank'> <img src={ logoFb } alt='facebook' /> </a>
+                        </div>
                     </div>
                 </div>
             </div>
