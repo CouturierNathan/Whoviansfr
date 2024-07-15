@@ -1,21 +1,33 @@
-const express = require('express');
-const app = express();
+const { exhibGetAll, exhibGetOne } = require('./exhib/manage');
 
-const userRoutes = require('./routes/userRoutes');
-const exhibRoutes = require('./routes/exhibRoutes');
+const express = require('express');
+const cors = require('cors');
+const app = express();
 
 require('dotenv').config();
 
-// Middleware pour parser les requêtes JSON
 app.use(express.json());
 
-// Définir les routes
-app.use('/api/users', userRoutes);
-app.use('/api/exhib', exhibRoutes);
+const allowedOrigin = process.env.ALLOWED_ORIGIN || '*';
 
-// Démarrer le serveur
+const corsOptions = {
+  origin: allowedOrigin,
+  optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
+
+app.use('/test', (req, res) => {
+  res.send('Welcome to the API');
+});
+
+app.get('/exhibs', exhibGetAll);
+app.get('/exhibs/:id', exhibGetOne);
+
+
+
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
 });
-

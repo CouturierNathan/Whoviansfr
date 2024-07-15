@@ -6,10 +6,10 @@ import '../../styles/Butt.css';
 const Butt = (props) => {
     return (
         <Link className='button' to={props.link}>
-            <span class="top-key"></span>
-            <span class="text">{props.text}</span>
-            <span class="bottom-key-1"></span>
-            <span class="bottom-key-2"></span>
+            <span className='top-key'></span>
+            <span className='text'>{props.text}</span>
+            <span className='bottom-key-1'></span>
+            <span className='bottom-key-2'></span>
         </Link>
     );
 }
