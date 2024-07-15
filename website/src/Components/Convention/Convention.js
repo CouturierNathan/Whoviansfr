@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Participants from './Participants';
+import Butt from '../common/Butt'
 
 import "../../styles/Convention.css";
 
@@ -48,7 +49,7 @@ const Convention = () => {
     return (
         <div>
             <div className='Topic Activities'>
-                <h2>À cette convention, nous prévoyons plusieurs activités qui pourraient vous plaire:</h2>
+                <h2>Aactivites qui pourraient vous plaire :</h2>
                 <div className='ActivitiesLst'>
                     {lst.map(p => {
                       return(
@@ -68,8 +69,11 @@ const Convention = () => {
                 <p>La Whovian France Convention est <strong>LA</strong> convention pour les fans de Doctor Who !</p>
                 <p>Elle se déroule le 11 Novembre 2024 à Moulins, le centre de la France, au campus d'Epitech !</p>
                 <p>Ce projet porté par des étudiants fans de la série et leurs directeur pédagogique, tous sont fan de l'univers du Docteur et souhaitaient partager leur passions avec tout les whovians. Grâce à des partenairs, que nous remercions, cet évènement est possible et ils nous permettent de vous proposer la meilleure expérience possible.</p>
+                <Butt text="Je m'inscris" link="/RegisterEvent/" />
             </div>
-            <Participants />
+            <div className='Topic'>
+                <Participants />
+            </div>
         </div>
     );
 }

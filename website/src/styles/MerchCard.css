@@ -4,24 +4,44 @@
     align-items: center;
     justify-content: center;
     
-    width: 210px;
-    height: 300px;
-    
-    border: 2px solid #ccc;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     
     margin: 20px;
+    padding: 5px;
+    width: 300px;
     transition: 0.1s;
-
-    overflow:hidden;
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
-.MerchCard img {
-    width: 150px;
-    height: 150px;
+.MerchImg {
+    width: 90%;
+    height: 200px;
     object-fit: cover;
-    border-radius: 10px 10px 0 0;
+    border-radius: 10px;
+    display: flex;
+    justify-content: flex-start;
+    overflow: hidden;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.MerchImg img {
+    width: auto;
+    height: 150%;
+}
+
+.Owner {
+    margin: 0.5em;
+    font-size: 1.2em;
+    text-align: center;
+}
+
+.desc {
+    margin: 0.5em;
+    font-size: 0.75em;
+    text-align: center;
 }
 
 .MerchCard .desc {
@@ -38,7 +58,7 @@
 }
 
 .MerchCard .desc::-webkit-scrollbar-thumb {
-    background-color: #00203c;
+    background-color: #004581;
     border-radius: 10px;
 }
 
@@ -48,7 +68,6 @@
 }
 
 .MerchCard:hover {
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
-    transform: scale(1.25);
-    transition: 0.1s;
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
