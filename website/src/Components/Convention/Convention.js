@@ -72,6 +72,7 @@ const Convention = () => {
                 <Butt text="Je m'inscris" link="/RegisterEvent/" />
             </div>
             <div className='Topic'>
+                <h2>Participants:</h2>
                 <Participants />
             </div>
         </div>

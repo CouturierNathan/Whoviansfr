@@ -21,10 +21,9 @@ function Participants() {
 
     return (
       <div>
-          <h3>Participants:</h3>
           <div className='ProductList'>
           {lst.map(p => (
-                <MerchCard key={p.id} Owner={p.name} link={p.img} desc={p.desc} />
+                <MerchCard key={p.id} Owner={p.name} link={p.img} desc={p.description} />
           ))}
           </div>
       </div>
