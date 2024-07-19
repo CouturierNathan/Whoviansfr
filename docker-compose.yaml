@@ -49,7 +49,7 @@ services:
     build: ./smtp
     container_name: smtp_c
     ports:
-      - "3000:3000"
+      - "25:25"
 
   website:
     build: ./website
