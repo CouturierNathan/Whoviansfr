@@ -2,12 +2,16 @@ FROM node:latest
 
 WORKDIR /app
 
-COPY package*.json .
+COPY . /app
+
+COPY package*.json /app
 
 RUN npm install
 
-COPY . .
-
 EXPOSE 3000
 
-CMD ["npm", "start"]
+COPY init.sh /app/init.sh
+RUN chmod +x /app/init.sh
+
+CMD ["/app/init.sh"]
+

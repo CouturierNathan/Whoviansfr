@@ -1,48 +1,96 @@
-import React, { useState } from 'react'; // Correction ici
+import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
+import Butt from '../common/Butt'
 import Form from 'react-bootstrap/Form';
 import '../../styles/Form.css';
 
 function MyForm() {
   const [formData, setFormData] = useState({
-    lastname: '',
-    name: '',
+    lname: '',
+    fname: '',
     email: '',
+    key: Math.floor(Math.random() * 1000000),
     cosplay: false,
     ecriture: false,
     diffusion: false,
+    key: generateRandomHexKey(16),
   });
 
+
+  const [validated, setValidated] = useState(false);
+
+  function generateRandomHexKey(length) {
+    let result = '';
+    const characters = '0123456789abcdef';
+    const charactersLength = characters.length;
+    for (let i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+  }
+
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData({
-      ...formData,
-      [name]: type === 'checkbox' ? checked : value,
-    });
-    console.log(e.target.className.split(' ')[0]);
-    console.log(e.target.value);
+    if (e.target.className.split(' ')[0] === 'form-check-input') {
+      setFormData({
+        ...formData,
+        [e.target.parentElement.className.split(' ')[0]]: e.target.checked,
+      });
+
+    } else {
+      setFormData({
+        ...formData,
+        [e.target.className.split(' ')[0]]: e.target.value,
+      });
+    }
   };
 
-  const sendval = (e) => { // Correction ici pour inclure e
+  const sendval = async (e) => {
     e.preventDefault();
-    console.log('sendval');
-    console.log(formData);
-
-    fetch('http://localhost:3001/user', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    })
-    .then((response) => response.json())
-    .then((data) => {
+  
+    const apiUrl = process.env.REACT_APP_API_URL;
+    console.log('API URL:', apiUrl);
+    
+    try {
+      const response = await fetch(`${apiUrl}/user`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      const data = await response.json();
       console.log('Success:', data);
-    })
-    .catch((error) => {
+      setValidated(true);
+  
+      const smtpUrl = process.env.REACT_APP_SMTP_URL;
+      console.log('SMTP URL:', smtpUrl);
+      
+      const smtpResponse = await fetch(`${smtpUrl}/send-email`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: formData.email, name: formData.fname, lname: formData.lname, key: formData.key }),
+      });
+  
+      const smtpData = await smtpResponse.json();
+      console.log('SMTP Success:', smtpData);
+    } catch (error) {
       console.error('Error:', error);
-    });
+    }
   };
+
+  if (validated) {
+    return(
+      <div className='Validated'>
+        <h1>Merci {formData.fname} de vous être inscrit !</h1>
+        <p>Vous allez recevoir un mail avec votre billet pour la journée !</p>
+        <p>Ne perdez pas vôtre billet, il vous le sera demandé pour certaines activités.</p>
+        <Butt text="Retour à l'acceuil" link="/"></Butt>
+      </div>
+    );
+  }
 
   return (
     <div className='myForm'>
@@ -57,19 +105,19 @@ function MyForm() {
         </div>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Nom</Form.Label>
-          <Form.Control className='fname' type="lastname" placeholder="Nom" onChange={handleChange}/>
+          <Form.Control className='lname' type="lname" placeholder="Nom" value={formData.lname} onChange={handleChange}/>
           <Form.Label>Prénom</Form.Label>
-          <Form.Control className='lname' type="name" placeholder="Prénom" onChange={handleChange}/>
+          <Form.Control className='fname' type="fname" placeholder="Prénom" value={formData.fname} onChange={handleChange}/>
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Email</Form.Label>
-          <Form.Control className='email' type="email" placeholder="Email" onChange={handleChange}/>
+          <Form.Control className='email' type="email" placeholder="Email" value={formData.email} onChange={handleChange}/>
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicCheckbox">
-          <Form.Check className='cosplay' type="checkbox" label="Je souhaites participe au concour de Cosplay (inscription obligatoire pour participation)" onChange={handleChange}/>
-          <Form.Check className='Gallifreyan' type="checkbox" label="Je souhaites participe à l'atelier d'écriture Gallifreyen" onChange={handleChange}/>
-          <Form.Check className='diffusion' type="checkbox" label="Je souhaites participe à la diffusion d'épisodes" onChange={handleChange}/>
+          <Form.Check className='cosplay' type="checkbox" label="Je souhaites participe au concour de Cosplay (inscription obligatoire pour participation)" value={formData.cosplay} onChange={handleChange}/>
+          <Form.Check className='ecriture' type="checkbox" label="Je souhaites participe à l'atelier d'écriture Gallifreyen" value={formData.ecriture} onChange={handleChange}/>
+          <Form.Check className='diffusion' type="checkbox" label="Je souhaites participe à la diffusion d'épisodes" value={formData.diffusion  } onChange={handleChange}/>
         </Form.Group>
         <div className='myButton'>
           <Button variant="primary" type="submit">

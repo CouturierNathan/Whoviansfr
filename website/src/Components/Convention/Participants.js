@@ -12,8 +12,6 @@ function Participants() {
         fetch(`${apiUrl}/exhibs`)
           .then(response => response.json())
           .then(data => {
-            console.log("Successfully fetched !");
-            console.log(data);
             setLst(data);
           })
           .catch(error => console.error('Error fetching data:', error));

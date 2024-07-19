@@ -25,7 +25,7 @@ app.use('/test', (req, res) => {
 app.get('/exhibs', exhibGetAll);
 app.get('/exhibs/:id', exhibGetOne);
 
-app.post('/user')
+app.post('/user', userCreate);
 
 
 

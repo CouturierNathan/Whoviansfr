@@ -13,12 +13,6 @@ const Footer = () => {
                     <h5>Mail: </h5>
                     <a href='mailto:contact@whovians.fr'> contact@whovians.fr </a>
                 </div>
-                <div className='separator'>
-                </div>
-                <div className='contact'>
-                    <h5>Téléphone: </h5>
-                    <p> 01 23 45 67 89 </p>
-                </div>
                 <div className='separator' />
                 <div className='contact'>
                     <h5>Adresse: </h5>

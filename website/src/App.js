@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Route, Routes } from 'react-router-dom';
 
-import Navbar from './Components/common/Navbar';
+import MyNavbar from './Components/common/Navbar';
 import Footer from './Components/common/Footer';
 import Home from './Components/Home/Home';
 import Convention from './Components/Convention/Convention';
@@ -16,7 +16,7 @@ import "./styles/generic.css"
 function App() {  
   return (
     <div className='wrapper'>
-      <Navbar />
+      <MyNavbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/Convention/" element={<Convention />} />

@@ -43,10 +43,19 @@ services:
     volumes:
       - ./api:/app
 
+  smtp:
+    image: bytemark/smtp
+    restart: always
+    build: ./smtp
+    container_name: smtp_c
+    ports:
+      - "3000:3000"
+
   website:
     build: ./website
     depends_on:
       - api
+      - smtp
     restart: unless-stopped
     container_name: website_c
     volumes:

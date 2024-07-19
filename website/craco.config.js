@@ -11,7 +11,18 @@ module.exports = {
         "buffer": require.resolve("buffer/"),
         "stream": require.resolve("stream-browserify"),
         "vm": require.resolve("vm-browserify"),
-        "process": require.resolve("process/browser")
+        "process": require.resolve("process/browser"),
+        "url": require.resolve("url/"),
+        "http": require.resolve("stream-http"),
+        "https": require.resolve("https-browserify"),
+        "zlib": require.resolve("browserify-zlib"),
+        "util": require.resolve("util/"),
+        "assert": require.resolve("assert/"),
+        "net": false,
+        "tls": false,
+        "dns": false,
+        "child_process": false,
+        "fs": false // Ajoute fs comme module vide
       };
 
       webpackConfig.plugins = [

@@ -16,9 +16,15 @@ function userCreate(req, res) {
         port: 3306,
     });
 
-    const fname = req.params.fname;
-    const lname = req.params.lname;
-    const email = req.params.email;
+    console.log("body: ", req.body);
+
+    const fname = req.body.fname;
+    const lname = req.body.lname;
+    const email = req.body.email;
+    const cosplay = req.body.cosplay;
+    const writing = req.body.ecriture;
+    const watching = req.body.diffusion;
+    const key = req.body.key;
 
     if (!isValidInput(fname) || !isValidInput(lname) || !isValidInput(email)) {
         res.send({ error: "Invalid input" });
@@ -26,16 +32,17 @@ function userCreate(req, res) {
         return;
     }
 
-    const query = `INSERT INTO users (id, fname, lname, email) VALUES (NULL, ?, ?, ?)`;
+    const query = `INSERT INTO users (fname, lname, email, cosplay, writing, watching, key_hex) VALUES (?, ?, ?, ?, ?, ?, ?)`;
 
-    connection.query(query, [fname, lname, email], (error, results) => {
+    connection.query(query, [fname, lname, email, cosplay, writing, watching, key], (error, results) => {
         if (error) {
             console.error('Database insertion error:', error);
-            res.json(0);
+            res.json(1);
             return res.status(500).send({ error: "Internal Server Error" });
         } else {
+            console.log("User created");
             res.send({ message: "User created", id: results.insertId });
-            res.json(1);
+            res.json(2);
         }
     });
 
