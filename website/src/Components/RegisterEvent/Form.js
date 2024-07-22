@@ -9,7 +9,6 @@ function MyForm() {
     lname: '',
     fname: '',
     email: '',
-    key: Math.floor(Math.random() * 1000000),
     cosplay: false,
     ecriture: false,
     diffusion: false,

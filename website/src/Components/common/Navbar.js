@@ -35,9 +35,9 @@ const MyNavbar = () => {
             <li>
               <Link to="/Convention" className='menu__link'>Convention</Link>
             </li>
-            <li>
+            {/* <li>
               <Link to="/workingon" className='menu__link'>Autre</Link>
-            </li>
+            </li> */}
         </div>
     </nav>
   );

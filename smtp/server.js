@@ -2,9 +2,7 @@ const express = require('express');
 const nodemailer = require('nodemailer');
 const { renderToFile } = require('@react-pdf/node');
 const React = require('react');
-const { View, Page, Text, Image, Document, StyleSheet } = require('@react-pdf/renderer');
-const QRCode = require('qrcode');
-const logo = 'path_to_your_logo/logo_solo.svg';
+import PDFFile from './PDFFile';
 const fs = require('fs');
 const path = require('path');
 const helmet = require('helmet');
@@ -12,106 +10,21 @@ const helmet = require('helmet');
 const app = express();
 app.use(helmet());
 
-const styles = StyleSheet.create({
-  page: {
-    flexDirection: 'column',
-    backgroundColor: '#FFFFFF',
-    padding: 20,
-  },
-  header: {
-    marginBottom: 20,
-    textAlign: 'center',
-  },
-  headerText: {
-    fontSize: 24,
-    marginBottom: 10,
-  },
-  image: {
-    width: 100,
-    height: 100,
-    marginBottom: 10,
-  },
-  section: {
-    margin: 10,
-    padding: 10,
-    flexDirection: 'column',
-    flexGrow: 1,
-    color: '#000000',
-    borderWidth: 1,
-    borderColor: '#000',
-    borderRadius: 5,
-  },
-  text: {
-    fontSize: 14,
-    marginBottom: 10,
-  },
-  qrCode: {
-    alignSelf: 'center',
-    marginTop: 20,
-    width: 100,
-    height: 100,
-  },
-});
-
-const PDFFile = ({ name, lname, key }) => {
-  const [qrCodeDataUrl, setQrCodeDataUrl] = React.useState('');
-
-  React.useEffect(() => {
-    QRCode.toDataURL(`${key}`)
-      .then(url => {
-        setQrCodeDataUrl(url);
-      })
-      .catch(err => {
-        console.error(err);
-      });
-  }, []);
-
-  return (
-    <Document
-      author="Whovians"
-      subject="Ticket d'évènement"
-      title="Billet pour Whovians Moulins"
-    >
-      <Page size="A4" style={styles.page}>
-        <View style={styles.header}>
-          <Text style={styles.headerText}>Évènement Whovians Moulins</Text>
-          <Image style={styles.image} src={logo} />
-        </View>
-        <View style={styles.section}>
-          <Text style={styles.text}>
-            Billet de ${name} ${lname} pour l'évènement Whovians Moulins, dédié aux fans de Doctor Who.
-          </Text>
-          <Text style={styles.text}>
-            <Text style={{ fontWeight: 'bold' }}>Date :</Text> 11 novembre
-          </Text>
-          <Text style={styles.text}>
-            <Text style={{ fontWeight: 'bold' }}>Lieu :</Text> Campus d'Epitech Moulins
-          </Text>
-          <Text style={styles.text}>
-            <Text style={{ fontWeight: 'bold' }}>Adresse :</Text> 9 rue de Bad Vilbel, 03000 Moulins
-          </Text>
-          {qrCodeDataUrl && <Image style={styles.qrCode} src={qrCodeDataUrl} />}
-        </View>
-      </Page>
-    </Document>
-  );
-};
 
 async function sendEmail(mail_to, name, lname, key) {
   const pdfPath = path.join(__dirname, 'ticket.pdf');
 
-  // Generate the PDF and save it to a file
   await renderToFile(<PDFFile name={name} lname={lname} key={key}/>, pdfPath);
 
   let transporter = nodemailer.createTransport({
     host: 'smtp.whovians.com',
-    port: 587,
+    port: 25,
     secure: false,
     requireTLS: true,
-    auth: {
-      user: 'contact@whovians.fr',
-      pass: '', // Add your password here
-    },
+    // auth: {
+    //   user: 'contact@whovians.fr',
+    //   pass: 'Whovians2024',
+    // },
   });
 
   try {
@@ -122,11 +35,73 @@ async function sendEmail(mail_to, name, lname, key) {
       html: `
         <body>
           <style>
-            /* Add your CSS styling here */
+            #body {
+              display:flex;
+              flex-direction:column;
+              max-height:100vh
+            }
+            h3 {
+              text-decoration:underline
+            }
+            h2 {
+              font-weight:1
+            }
+            p {
+              font-size:1em
+            }
+            strong {
+              text-decoration:underline;
+              font-size:1.2em
+            }
+            .Footer {
+              display:flex;
+              justify-content:center;
+              align-items:center;
+              height:100px;
+              margin-top:15px;
+              border-top:2px solid #c7c5c5
+            }
+            .Footer .container {
+              display:flex;
+              justify-content:center;
+              align-items:center;
+              width:100%;
+              height:100%
+            }
+            .Footer .container .contact {
+              display:flex;
+              justify-content:center;
+              align-items:center;
+              width:90%;
+              flex-direction:column;
+              align-content:center;
+              flex-wrap:nowrap
+            }
+            .Footer .container .separator {
+              background-color:#c7c5c5;
+              margin-top:5%;
+              margin-bottom:5%;
+              height:90%;
+              width:.6%;
+              border-radius:60px
+            }
+            .socialmedia {
+              display:flex;
+              justify-content:space-between;
+              align-items:center;
+              flex-direction:row;
+              align-content:center;
+              flex-wrap:nowrap
+            }
+            .social a img {
+              width:30px;
+              height:30px;
+              margin:5px
+            }
           </style>
           <center>
             <h2>Nous vous remercions de votre inscription à la convention Whovians Moulins.</h2>
-            <img src="" alt="logo">
+            <img src="http://whovians.fr/static/media/logo_solo.ad8dec602d95f47d9adc33fd2bd2d934.svg" alt="logo">
           </center>
           <div id="body">
             <h2>Bonjour ${name}</h2>
@@ -182,7 +157,6 @@ async function sendEmail(mail_to, name, lname, key) {
     console.log(mail_to);
     console.error('Error sending email:', error);
   } finally {
-    // Remove the temporary PDF file
     fs.unlinkSync(pdfPath);
   }
 }
@@ -199,8 +173,7 @@ app.post('/send-email', async (req, res) => {
   }
 });
 
-// Utilisez un port sécurisé pour le serveur HTTP, par exemple 3000
-const PORT = 3000;
+const PORT = 25;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
