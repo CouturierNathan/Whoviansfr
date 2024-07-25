@@ -39,7 +39,7 @@ services:
       DB_NAME: ${MYSQL_DATABASE}
       PORT: ${API_PORT}
     ports:
-      - "${API_PORT}:${API_PORT}"
+      - "4000:${API_PORT}"
     volumes:
       - ./api:/app
 
@@ -49,7 +49,7 @@ services:
     build: ./smtp
     container_name: smtp_c
     ports:
-      - "25:25"
+      - "5000:5000"
 
   website:
     build: ./website
@@ -68,4 +68,4 @@ services:
       REACT_APP_API_URL: localhost:${API_PORT}
       REACT_APP_NODE_OPTIONS: --openssl-legacy-provider
     ports:
-      - "${FRONTEND_PORT}:${FRONTEND_PORT}"
+      - "3000:${FRONTEND_PORT}"

@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react'; // Import useEffect
-import MerchCard from './MerchCard';
-import "../../styles/Participants.css";
+
+import "../../styles/Convention.css";
 
 require('dotenv').config();
 
-function Participants() {
+function Act() {
     const [lst, setLst] = useState([]);
 
     useEffect(() => {
         const apiUrl = process.env.REACT_APP_API_URL;
-        fetch(`${apiUrl}/exhibs`)
+        fetch(`${apiUrl}/acts`)
           .then(response => response.json())
           .then(data => {
             if (Array.isArray(data)) {
@@ -28,13 +28,17 @@ function Participants() {
 
     return (
       <div>
-          <div className='ProductList'>
           {lst.map(p => (
-                  <MerchCard key={p.id} Owner={p.name} link={p.img} desc={p.description} />
+                <div className='ActivityCard' key={p.id}>
+                  <div className={p.imgclass}>
+                      <img src={p.img} alt={p.alt} />
+                  </div>
+                  <h4>{p.title}</h4>
+                  <p>{p.desc}</p>
+                </div>
             ))}
-          </div>
       </div>
     );
 }
 
-export default Participants;
+export default Act;

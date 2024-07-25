@@ -22,8 +22,6 @@ function userCreate(req, res) {
     const lname = req.body.lname;
     const email = req.body.email;
     const cosplay = req.body.cosplay;
-    const writing = req.body.ecriture;
-    const watching = req.body.diffusion;
     const key = req.body.key;
 
     if (!isValidInput(fname) || !isValidInput(lname) || !isValidInput(email)) {
@@ -32,9 +30,9 @@ function userCreate(req, res) {
         return;
     }
 
-    const query = `INSERT INTO users (fname, lname, email, cosplay, writing, watching, key_hex) VALUES (?, ?, ?, ?, ?, ?, ?)`;
+    const query = `INSERT INTO users (fname, lname, email, cosplay, key_hex) VALUES (?, ?, ?, ?, ?)`;
 
-    connection.query(query, [fname, lname, email, cosplay, writing, watching, key], (error, results) => {
+    connection.query(query, [fname, lname, email, cosplay, key], (error, results) => {
         if (error) {
             console.error('Database insertion error:', error);
             res.json(1);

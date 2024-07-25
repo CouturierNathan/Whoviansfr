@@ -1,6 +1,6 @@
 @font-face {
-  font-family: 'Doctor-Who';
-  src: url('fonts/Doctor-Who.ttf') format('truetype');
+  font-family: 'Oswald';
+  src: url('fonts/Oswald/static/Oswald-SemiBold.ttf') format('truetype');
   font-weight: 200;
   font-style: normal;
 }
@@ -56,14 +56,14 @@
     font-size: 5em;
     text-align: center;
     color: yellow;
-    font-family: 'Doctor-Who', sans-serif;
+    font-family: "Oswald", sans-serif;
 }
 
 .Event .description h2 {
     font-size: 3em;
     text-align: center;
     color: yellow;
-    font-family: 'Doctor-Who', sans-serif;
+    font-family: "Oswald", sans-serif;
 }
 
 .details {

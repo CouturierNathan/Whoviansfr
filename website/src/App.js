@@ -6,6 +6,7 @@ import MyNavbar from './Components/common/Navbar';
 import Footer from './Components/common/Footer';
 import Home from './Components/Home/Home';
 import Convention from './Components/Convention/Convention';
+import Contact from './Components/Contact/Contact';
 import RegisterEvent from './Components/RegisterEvent/RegisterEvent';
 
 import NotFound from './Components/generic/NotFound';
@@ -22,6 +23,7 @@ function App() {
         <Route path="/Convention/" element={<Convention />} />
         <Route path="/generic/workingon" element={<WorkingOn />} />
         <Route path="/RegisterEvent/" element={<RegisterEvent />} />
+        <Route path="/Contact/" element={<Contact />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <main className='void'/>

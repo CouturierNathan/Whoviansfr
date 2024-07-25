@@ -2,34 +2,34 @@ const express = require('express');
 const nodemailer = require('nodemailer');
 const { renderToFile } = require('@react-pdf/node');
 const React = require('react');
-import PDFFile from './PDFFile';
+const PDFFile = require('./PDFFile'); // Assure-toi que l'import fonctionne
 const fs = require('fs');
 const path = require('path');
 const helmet = require('helmet');
+require('dotenv').config();
 
 const app = express();
 app.use(helmet());
 
-
 async function sendEmail(mail_to, name, lname, key) {
   const pdfPath = path.join(__dirname, 'ticket.pdf');
 
-  await renderToFile(<PDFFile name={name} lname={lname} key={key}/>, pdfPath);
+  await renderToFile(<PDFFile name={name} lname={lname} key={key} />, pdfPath);
 
   let transporter = nodemailer.createTransport({
-    host: 'smtp.whovians.com',
-    port: 25,
+    host: process.env.SMTP_HOST,
+    port: process.env.SMTP_PORT,
     secure: false,
     requireTLS: true,
     // auth: {
-    //   user: 'contact@whovians.fr',
-    //   pass: 'Whovians2024',
+    //   user: process.env.SMTP_USER,
+    //   pass: process.env.SMTP_PASS,
     // },
   });
 
   try {
     let info = await transporter.sendMail({
-      from: '"Whovians Contact" <contact@whovians.fr>',
+      from: process.env.FROM_EMAIL,
       to: mail_to,
       subject: `Confirmation inscription Whovians Moulins`,
       html: `
@@ -173,7 +173,7 @@ app.post('/send-email', async (req, res) => {
   }
 });
 
-const PORT = 25;
+const PORT = 5000;
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`SMTP Server is running on port ${PORT}`);
 });

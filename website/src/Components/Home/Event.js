@@ -21,7 +21,7 @@ const Event = () => {
                 <ul>
                   <li>Concours de cosplay</li>
                   <li>Ateliers écriture Gallifreyen</li>
-                  <li>Diffusion d'épisodes</li>
+                  <li>Concours d'Illustrations</li>
                   <li>Ventes de merch</li>
                   <li>...</li>
                 </ul>

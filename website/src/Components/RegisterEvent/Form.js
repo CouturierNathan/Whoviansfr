@@ -10,8 +10,6 @@ function MyForm() {
     fname: '',
     email: '',
     cosplay: false,
-    ecriture: false,
-    diffusion: false,
     key: generateRandomHexKey(16),
   });
 
@@ -115,8 +113,6 @@ function MyForm() {
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicCheckbox">
           <Form.Check className='cosplay' type="checkbox" label="Je souhaites participe au concour de Cosplay (inscription obligatoire pour participation)" value={formData.cosplay} onChange={handleChange}/>
-          <Form.Check className='ecriture' type="checkbox" label="Je souhaites participe à l'atelier d'écriture Gallifreyen" value={formData.ecriture} onChange={handleChange}/>
-          <Form.Check className='diffusion' type="checkbox" label="Je souhaites participe à la diffusion d'épisodes" value={formData.diffusion  } onChange={handleChange}/>
         </Form.Group>
         <div className='myButton'>
           <Button variant="primary" type="submit">

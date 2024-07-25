@@ -1,5 +1,11 @@
 import Carousel from 'react-bootstrap/Carousel';
-import img from '../../assets/Homer hiding.jpg';
+
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+import first from '../../assets/Affiche_off.png';
+import second from '../../assets/free.png';
+import third from '../../assets/Illustration.png';
 
 const MyCaroussel = () => {
   return (
@@ -7,35 +13,33 @@ const MyCaroussel = () => {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src={img}
-          alt="First slide"
+          src={first}
+          alt="Affiche officielle"
         />
-        <Carousel.Caption>
-          <h3>First slide label</h3>
-          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-        </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src={img}
+          src={second}
           alt="Second slide"
         />
         <Carousel.Caption>
-          <h3>Second slide label</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          <h3>Une convention GRATUITE</h3>
+          <p>Nous voulons rassembler un maximum de fans, d'où la gratuité de l'évènement !</p>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
+        <Link to="/Convention">
         <img
           className="d-block w-100"
-          src={img}
+          src={third}
           alt="Third slide"
         />
         <Carousel.Caption>
-          <h3>Third slide label</h3>
-          <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+          <h3>Des Activités</h3>
+          <p>Clique moi pour découvrir les activités.</p>
         </Carousel.Caption>
+        </Link>
       </Carousel.Item>
     </Carousel>
   );
