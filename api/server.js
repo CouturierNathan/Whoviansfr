@@ -1,5 +1,6 @@
 const { exhibGetAll, exhibGetOne } = require('./exhib/manage');
 const { userCreate } = require('./user/manage');
+const { actGetAll, actGetOne } = require('./activities/manage');
 
 const express = require('express');
 const cors = require('cors');
@@ -24,6 +25,9 @@ app.use('/test', (req, res) => {
 
 app.get('/exhibs', exhibGetAll);
 app.get('/exhibs/:id', exhibGetOne);
+
+app.get('/acts', actGetAll);
+app.get('/acts/:id', actGetOne);
 
 app.post('/user', userCreate);
 

@@ -45,7 +45,6 @@ function MyForm() {
     e.preventDefault();
   
     const apiUrl = process.env.REACT_APP_API_URL;
-    console.log('API URL:', apiUrl);
     
     try {
       const response = await fetch(`${apiUrl}/user`, {
@@ -57,11 +56,9 @@ function MyForm() {
       });
   
       const data = await response.json();
-      console.log('Success:', data);
       setValidated(true);
   
       const smtpUrl = process.env.REACT_APP_SMTP_URL;
-      console.log('SMTP URL:', smtpUrl);
       
       const smtpResponse = await fetch(`${smtpUrl}/send-email`, {
         method: 'POST',

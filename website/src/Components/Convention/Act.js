@@ -15,7 +15,6 @@ function Act() {
             if (Array.isArray(data)) {
                 setLst(data);
             } else {
-                console.error('Data is not an array:', data);
                 setLst([]); // Set to an empty array if data is not an array
             }
           })
