@@ -26,7 +26,7 @@ function Contact() {
     try {
       setValidated(true);
   
-      const smtpUrl = process.env.REACT_APP_SMTP_URL;
+      const smtpUrl = process.env.REACT_APP_API_URL;
       
       const smtpResponse = await fetch(`${smtpUrl}/send-email`, {
         method: 'POST',

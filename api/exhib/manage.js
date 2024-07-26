@@ -2,7 +2,7 @@ const mysql = require('mysql2');
 const dotenv = require('dotenv');
 dotenv.config();
 
-function exhibGetAll(req, res) {
+export const exhibGetAll = (req, res) => {
     const connection = mysql.createConnection({
         host: process.env.DB_HOST,
         user: process.env.DB_USER,
@@ -25,7 +25,7 @@ function exhibGetAll(req, res) {
     connection.end();
 }
 
-function exhibGetOne(req, res) {
+export const exhibGetOne = (req, res) => {
     const id = req.params.id;
     const connection = mysql.createConnection({
         host: process.env.DB_HOST,
@@ -50,5 +50,3 @@ function exhibGetOne(req, res) {
 
     connection.end();
 }
-
-module.exports = { exhibGetAll, exhibGetOne };

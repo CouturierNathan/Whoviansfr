@@ -7,7 +7,7 @@ function isValidInput(input) {
     return regex.test(input);
 }
 
-function userCreate(req, res) {
+export const userCreate = (req, res) => {
     const connection = mysql.createConnection({
         host: process.env.DB_HOST,
         user: process.env.DB_USER,
@@ -46,5 +46,3 @@ function userCreate(req, res) {
 
     connection.end();
 }
-
-module.exports = { userCreate };

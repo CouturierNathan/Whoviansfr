@@ -57,10 +57,8 @@ function MyForm() {
   
       const data = await response.json();
       setValidated(true);
-  
-      const smtpUrl = process.env.REACT_APP_SMTP_URL;
-      
-      const smtpResponse = await fetch(`${smtpUrl}/send-email`, {
+        
+      const smtpResponse = await fetch(`${apiUrl}/send-email`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

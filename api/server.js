@@ -1,13 +1,15 @@
-const { exhibGetAll, exhibGetOne } = require('./exhib/manage');
-const { userCreate } = require('./user/manage');
-const { actGetAll, actGetOne } = require('./activities/manage');
+// server.js
+import express from 'express';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import { exhibGetAll, exhibGetOne } from './exhib/manage.js';
+import { userCreate } from './user/manage.js';
+import { actGetAll, actGetOne } from './activities/manage.js';
+import sendEmail from './mail/mailer.js';
 
-const express = require('express');
-const cors = require('cors');
+dotenv.config();
+
 const app = express();
-
-require('dotenv').config();
-
 app.use(express.json());
 
 const allowedOrigin = process.env.ALLOWED_ORIGIN || '*';
@@ -31,7 +33,15 @@ app.get('/acts/:id', actGetOne);
 
 app.post('/user', userCreate);
 
-
+app.post('/send-email', async (req, res) => {
+  const { email, name, lname, key } = req.body;
+  try {
+    await sendEmail(email, name, lname, key);
+    res.status(200).json({ message: 'Email sent successfully' });
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to send email' });
+  }
+});
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

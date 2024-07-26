@@ -1,15 +1,9 @@
-const express = require('express');
-const nodemailer = require('nodemailer');
-const { renderToFile } = require('@react-pdf/node');
-const React = require('react');
-const PDFFile = require('./PDFFile'); // Assure-toi que l'import fonctionne
-const fs = require('fs');
-const path = require('path');
-const helmet = require('helmet');
-require('dotenv').config();
-
-const app = express();
-app.use(helmet());
+import nodemailer from 'nodemailer';
+import { renderToFile } from '@react-pdf/renderer';
+import React from 'react';
+import PDFFile from './PDFFile'; // Assurez-vous que l'import fonctionne
+import fs from 'fs';
+import path from 'path';
 
 async function sendEmail(mail_to, name, lname, key) {
   const pdfPath = path.join(__dirname, 'ticket.pdf');
@@ -161,19 +155,4 @@ async function sendEmail(mail_to, name, lname, key) {
   }
 }
 
-app.use(express.json());
-
-app.post('/send-email', async (req, res) => {
-  const { email, name, lname, key } = req.body;
-  try {
-    await sendEmail(email, name, lname, key);
-    res.status(200).json({ message: 'Email sent successfully' });
-  } catch (error) {
-    res.status(500).json({ error: 'Failed to send email' });
-  }
-});
-
-const PORT = 5000;
-app.listen(PORT, () => {
-  console.log(`SMTP Server is running on port ${PORT}`);
-});
+export default sendEmail;
