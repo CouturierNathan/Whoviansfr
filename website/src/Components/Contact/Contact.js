@@ -4,13 +4,13 @@ import Butt from '../common/Butt'
 import Form from 'react-bootstrap/Form';
 import '../../styles/Form.css';
 
-function MyForm() {
+function Contact() {
+  const [validated, setValidated] = useState(false);
   const [formData, setFormData] = useState({
     lname: '',
     fname: '',
     email: '',
     message: '',
-    key: generateRandomHexKey(16),
   });
 
   const handleChange = (e) => {
@@ -22,7 +22,6 @@ function MyForm() {
 
   const sendval = async (e) => {
     e.preventDefault();
-    const apiUrl = process.env.REACT_APP_API_URL;
     
     try {
       setValidated(true);
@@ -43,14 +42,13 @@ function MyForm() {
       console.error('Error:', error);
     }
   };
-  };
 
   if (validated) {
     return(
       <div className='Validated'>
-        <h1>Merci {formData.fname} de vous être inscrit !</h1>
-        <p>Vous allez recevoir un mail avec votre billet pour la journée !</p>
-        <p>Ne perdez pas vôtre billet, il vous le sera demandé pour certaines activités.</p>
+        <h1>Merci {formData.fname}.</h1>
+        <p>Vôtre message a bien été envoyé !</p>
+        <p>Nous allons le traiter d'ici peux.</p>
         <Butt text="Retour à l'acceuil" link="/"></Butt>
       </div>
     );
@@ -92,4 +90,4 @@ function MyForm() {
   );
 }
 
-export default MyForm;
+export default Contact;
